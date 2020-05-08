@@ -2,12 +2,21 @@ import scrape from 'html-metadata'
 import cheerio from 'cheerio'
 
 export default class PeekLink {
-  constructor(url) {
-    this.url = url;
+  constructor() {
+    // this.url = url;
   }
 
-  async links() {
-    this.metaData = await scrape(this.url)
+  async run(html) {
+    const link = this.firstLink(html);
+    return {
+      content: this.getTextFromHtml(html),
+      links: await this.links(link),
+      link: link,
+    }
+  }
+
+  async links(url) {
+    this.metaData = await scrape(url)
 
     this.twitter = (this.metaData.twitter)
       ? this.getData(this.metaData.twitter)
