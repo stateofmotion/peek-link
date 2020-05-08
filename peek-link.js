@@ -1,4 +1,5 @@
 import scrape from 'html-metadata'
+import cheerio from 'cheerio'
 
 export default class PeekLink {
   constructor(url) {
@@ -25,6 +26,13 @@ export default class PeekLink {
       openGraph: this.openGraph,
       general: this.general,
     }
+  }
+
+  firstLink(html) {
+    if (!html) return null
+    const $ = cheerio.load(html)
+    let link = $('a').first().attr('href')
+    return link ? link : null;
   }
 
   getData(data) {
