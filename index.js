@@ -1,6 +1,11 @@
 import PeakLink from './peek-link.js'
 
-const pl = new PeakLink('https://www.npr.org/2020/05/07/852464328/former-georgia-police-officer-and-his-son-arrested-in-the-death-of-ahmaud-arbery')
+const pl = new PeakLink('https://www.cnn.com/world/live-news/coronavirus-pandemic-05-07-20-intl/index.html')
 
-pl.links()
+async function init() {
+  const links = await pl.links();
+  console.log('links :>> ', links);
+}
+
+init();
 
