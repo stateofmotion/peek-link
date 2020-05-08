@@ -7,14 +7,18 @@ async function init() {
   sed do eiusmod tempor incididunt ut labore et dolore magna
     <a href="http://google.com"> Google</a>
       aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p >
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        \n
+        \r
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna
     <a href="http://npr.com">Npr</a>
     aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>`
 
   // const links = await pl.links();
   const firstLink = await pl.firstLink(html)
-  // console.log('links :>> ', links);
+
+  let text = await pl.getTextFromHtml(html)
+  console.log('links :>> ', text);
 }
 
 init();

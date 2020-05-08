@@ -43,6 +43,13 @@ export default class PeekLink {
     }
   }
 
+  getTextFromHtml(html) {
+    const $ = cheerio.load(html)
+
+    let text = $("*").text()
+    return text.replace(/\s\s+/g, ' ');
+  }
+
   getImage(data) {
     return (data && data.image && data.image.url && data.image.url) ? data.image.url : null
   }
