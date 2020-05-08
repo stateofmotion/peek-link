@@ -1,7 +1,4 @@
-// import http from 'http'
-// import { JSDOM } from 'jsdom'
 import scrape from 'html-metadata'
-import cheerio from 'cheerio'
 
 export default class PeekLink {
   constructor(url) {
