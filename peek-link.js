@@ -1,11 +1,38 @@
 import scrape from 'html-metadata'
 import cheerio from 'cheerio'
 
+/**
+ * General link data from the page as well as open graph and twitter data.
+ * @typedef {Object} LinkPreviews
+ * @property {Link} twitter
+ * @property {Link} openGraph
+ * @property {Link} general
+ */
+
+/**
+* Link data including image url, page description and page title
+* @typedef {Object} Link
+* @property {string} image
+* @property {string} title
+* @property {string} description
+*/
+
+
 export default class PeekLink {
-  constructor() {
-    // this.url = url;
+  constructor(peekLinkData) {
+    this.html = peekLinkData && peekLinkData.html ? peekLinkData.html : null
+    this.url = peekLinkData && peekLinkData.url ? peekLinkData.url : null
+
+    if (this.url) {
+      this.links = this.fromUrl(this.url)
+    }
   }
 
+  /**
+   * 
+   * @param {string} html
+   * @return {}
+   */
   async run(html) {
     const link = this.firstLink(html);
     return {
@@ -15,7 +42,15 @@ export default class PeekLink {
     }
   }
 
-  async links(url) {
+  async fromHtml(inHtml = '') {
+
+    // // If html provided take precedence over html passed in through constructor
+    // if (html) {
+
+    // }
+  }
+
+  async fromUrl(url) {
     this.metaData = await scrape(url)
 
     this.twitter = (this.metaData.twitter)

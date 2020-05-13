@@ -1,7 +1,7 @@
 {
   "name": "peak-link",
   "version": "1.0.0",
-  "description": "Link preview meta data",
+  "description": "Package for getting open graph settings, and twitter link preview data from a url, or from the first link in a block of html content.",
   "main": "index.js",
   "type": "module",
   "scripts": {
