@@ -51,7 +51,7 @@ pl.fromUrl([YOUR_URL_HERE])
 })
 ```
 
-## Get Link Previews from a HTML
+## Get Link Previews from HTML
 
 ### Example 1
 
