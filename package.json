@@ -2,10 +2,13 @@
   "name": "peek-link",
   "version": "1.0.6",
   "description": "Package for getting open graph settings, and twitter link preview data from a url, or from the first link in a block of html content.",
-  "main": "peek-link.js",
+  "main": "lib/peek-link.js",
   "type": "module",
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "prepublish": "babel src -d lib"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/stateofmotion/peek-link.git"
@@ -23,5 +26,15 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "html-metadata": "^1.7.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-es2015"
+    ]
   }
 }
