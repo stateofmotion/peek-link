@@ -22,7 +22,17 @@ export default class PeekLink {
   constructor(peekLinkData) {
     this.html = peekLinkData && peekLinkData.html ? peekLinkData.html : null
     this.url = peekLinkData && peekLinkData.url ? peekLinkData.url : null
-    this.links = null
+    this.links = { twitter: null, openGraph: null, general: null }
+  }
+
+  get linkPreviews() {
+    if (this.url) {
+      return this.fromUrl(this.url)
+    } else if (this.html) {
+      return this.fromHtml(this.html)
+    }
+
+    return this.links
   }
 
   async fromHtml(inHtml = '') {
@@ -44,7 +54,8 @@ export default class PeekLink {
     return this.url
   }
 
-  async fromUrl(url = '') {
+  async fromUrl(inUrl = '') {
+    const url = inUrl ? inUrl : this.url;
     this.metaData = url ? await scrape(url) : null
 
     this.twitter = (this.metaData && this.metaData.twitter)
