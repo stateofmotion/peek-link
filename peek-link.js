@@ -22,46 +22,40 @@ export default class PeekLink {
   constructor(peekLinkData) {
     this.html = peekLinkData && peekLinkData.html ? peekLinkData.html : null
     this.url = peekLinkData && peekLinkData.url ? peekLinkData.url : null
-
-    if (this.url) {
-      this.links = this.fromUrl(this.url)
-    }
-  }
-
-  /**
-   * 
-   * @param {string} html
-   * @return {}
-   */
-  async run(html) {
-    const link = this.firstLink(html);
-    return {
-      content: this.getTextFromHtml(html),
-      links: await this.links(link),
-      link: link,
-    }
+    this.links = null
   }
 
   async fromHtml(inHtml = '') {
+    const html = inHtml ? inHtml : this.html
 
-    // // If html provided take precedence over html passed in through constructor
-    // if (html) {
+    if (html) {
+      const url = await this.urlFromHtml(html)
+      if (url) {
+        this.links = await this.fromUrl(url)
+      }
+    }
 
-    // }
+    return this.links
   }
 
-  async fromUrl(url) {
-    this.metaData = await scrape(url)
+  async urlFromHtml(inHtml = '') {
+    const html = inHtml ? inHtml : this.html
+    this.url = this.firstLink(html)
+    return this.url
+  }
 
-    this.twitter = (this.metaData.twitter)
+  async fromUrl(url = '') {
+    this.metaData = url ? await scrape(url) : null
+
+    this.twitter = (this.metaData && this.metaData.twitter)
       ? this.getData(this.metaData.twitter)
       : this.getData(null)
 
-    this.openGraph = (this.metaData.openGraph)
+    this.openGraph = (this.metaData && this.metaData.openGraph)
       ? this.getData(this.metaData.openGraph)
       : this.getData(null)
 
-    this.general = (this.metaData.general)
+    this.general = (this.metaData && this.metaData.general)
       ? this.getData(this.metaData.general)
       : this.getData(null)
 
@@ -76,7 +70,7 @@ export default class PeekLink {
     if (!html) return null
     const $ = cheerio.load(html)
     let link = $('a').first().attr('href')
-    return link ? link : null;
+    return link ? link : null
   }
 
   getData(data) {
