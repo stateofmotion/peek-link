@@ -19,14 +19,73 @@ npm install peek-link
 Create a new instance of PeekLink passing in an object literal with a url key and value
 
 ```
-// pass in object literal with either a text block of html, or a url
-
 const pl = new PeekLink({
   url: [PROVIDE_YOUR_URL_HERE]
 })
 
 
 const links = await pl.fromUrl()
+
+// Can also use then/catch
+pl.fromUrl()
+.then(function(links) {
+  console.log(links)
+}).catch(function(error) {
+  console.log(error)
+})
+```
+
+### Example 2
+
+```
+const pl = new PeekLink()
+
+const links = await pl.fromUrl([YOUR_URL_HERE])
+
+// Can also use then/catch
+pl.fromUrl([YOUR_URL_HERE])
+.then(function(links) {
+  console.log(links)
+}).catch(function(error) {
+  console.log(error)
+})
+```
+
+## Get Link Previews from a HTML
+
+### Example 1
+
+```
+const pl = new PeekLink({
+  html: [HTML_AS_STRING]
+})
+
+
+const links = await pl.fromHtml()
+
+// Can also use then/catch
+pl.fromHtml()
+.then(function(links) {
+  console.log(links)
+}).catch(function(error) {
+  console.log(error)
+})
+```
+
+### Example 2
+
+```
+const pl = new PeekLink()
+
+
+const links = await pl.fromHtml([HTML_AS_STRING])
+// Can also use then/catch
+pl.fromHtml([HTML_AS_STRING])
+.then(function(links) {
+  console.log(links)
+}).catch(function(error) {
+  console.log(error)
+})
 ```
 
 ## Link Preview Response
@@ -50,3 +109,5 @@ const links = await pl.fromUrl()
   }
 }
 ```
+
+
