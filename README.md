@@ -13,6 +13,17 @@ Get open grah settings, and twitter link preview data from a provided url. PeekL
 npm install peek-link
 ```
 
+## Usage
+
+```
+// ES6
+import PeekLink from 'peek-link'
+```
+
+```
+const PeekLink = require('peek-link)
+```
+
 ## Get Link Previews from a URL
 
 ### Example 1
@@ -23,7 +34,7 @@ const pl = new PeekLink({
   url: [PROVIDE_YOUR_URL_HERE]
 })
 
-
+// ES6
 const links = await pl.fromUrl()
 
 // Can also use then/catch
@@ -40,6 +51,7 @@ pl.fromUrl()
 ```
 const pl = new PeekLink()
 
+// ES6
 const links = await pl.fromUrl([YOUR_URL_HERE])
 
 // Can also use then/catch
@@ -60,7 +72,7 @@ const pl = new PeekLink({
   html: [HTML_AS_STRING]
 })
 
-
+// ES6
 const links = await pl.fromHtml()
 
 // Can also use then/catch
@@ -77,8 +89,9 @@ pl.fromHtml()
 ```
 const pl = new PeekLink()
 
-
+// ES6
 const links = await pl.fromHtml([HTML_AS_STRING])
+
 // Can also use then/catch
 pl.fromHtml([HTML_AS_STRING])
 .then(function(links) {
