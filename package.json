@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
+    "get-urls": "^9.2.0",
     "html-metadata": "^1.7.1"
   },
   "devDependencies": {
