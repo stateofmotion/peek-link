@@ -1,6 +1,6 @@
 {
   "name": "peek-link",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Package for getting open graph settings, and twitter link preview data from a url, or from the first link in a block of html content.",
   "main": "lib/peek-link.js",
   "author": "",
