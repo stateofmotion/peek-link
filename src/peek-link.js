@@ -1,5 +1,6 @@
 import scrape from 'html-metadata'
 import cheerio from 'cheerio'
+import getUrls from 'get-urls'
 
 /**
  * General link data from the page as well as open graph and twitter data.
@@ -39,9 +40,16 @@ export default class PeekLink {
     const html = inHtml ? inHtml : this.html
 
     if (html) {
-      const url = await this.urlFromHtml(html)
+      let url = await this.urlFromHtml(html)
       if (url) {
         this.links = await this.fromUrl(url)
+      } else {
+        // try finding first link from text if content is not HTML
+        const urls = getUrls(html)
+        if (urls.size) {
+          url = urls.values().next().value
+          this.links = await this.fromUrl(url)
+        }
       }
     }
 
@@ -57,6 +65,7 @@ export default class PeekLink {
   async fromUrl(inUrl = '') {
     const url = inUrl ? inUrl : this.url;
     this.metaData = url ? await scrape(url) : null
+    this.url = url;
 
     this.twitter = (this.metaData && this.metaData.twitter)
       ? this.getData(this.metaData.twitter)
